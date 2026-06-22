@@ -1,0 +1,13 @@
+*.xml
+*.zip
+Profiles-*/
+WiFi_Profile_Toolkit_*/
+NETWORK_PROFILES/
+SENSITIVE-MANIFEST.csv
+DO-NOT-COMMIT.txt
+*.log
+before.json
+after.json
+*-saved-profiles.txt
+*-wlan-interfaces.txt
+*-wireless-adapters.csv
