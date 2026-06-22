@@ -3,6 +3,7 @@ setlocal
 cd /d "%~dp0"
 
 :menu
+set "CHOICE="
 cls
 echo ============================================================
 echo   WI-FI PROFILE BACKUP RESTORE AND REPAIR TOOLKIT
@@ -33,34 +34,40 @@ powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File "%~dp0Windows_Wi
 goto complete
 
 :exportclean
+set "PROFILE="
 set /p PROFILE=Profile name (leave blank for all profiles): 
 if "%PROFILE%"=="" powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File "%~dp0Windows_WiFi_Profile_Backup_Restore_Toolkit.ps1" -Action ExportProfiles
 if not "%PROFILE%"=="" powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File "%~dp0Windows_WiFi_Profile_Backup_Restore_Toolkit.ps1" -Action ExportProfiles -ProfileName "%PROFILE%"
 goto complete
 
 :exportsensitive
+set "PROFILE="
 set /p PROFILE=Profile name (leave blank for all profiles): 
 if "%PROFILE%"=="" powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File "%~dp0Windows_WiFi_Profile_Backup_Restore_Toolkit.ps1" -Action ExportProfilesWithKeys
 if not "%PROFILE%"=="" powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File "%~dp0Windows_WiFi_Profile_Backup_Restore_Toolkit.ps1" -Action ExportProfilesWithKeys -ProfileName "%PROFILE%"
 goto complete
 
 :importprofiles
+set "IMPORTFOLDER="
 set /p IMPORTFOLDER=Folder containing Wi-Fi XML profiles: 
 powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File "%~dp0Windows_WiFi_Profile_Backup_Restore_Toolkit.ps1" -Action ImportProfiles -ImportPath "%IMPORTFOLDER%"
 goto complete
 
 :repair
+set "ADAPTER="
 set /p ADAPTER=Wireless adapter name (leave blank to skip adapter restart): 
 if "%ADAPTER%"=="" powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File "%~dp0Windows_WiFi_Profile_Backup_Restore_Toolkit.ps1" -Action RepairAllSafe
 if not "%ADAPTER%"=="" powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File "%~dp0Windows_WiFi_Profile_Backup_Restore_Toolkit.ps1" -Action RepairAllSafe -AdapterName "%ADAPTER%"
 goto complete
 
 :adapter
+set "ADAPTER="
 set /p ADAPTER=Wireless adapter name: 
 powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File "%~dp0Windows_WiFi_Profile_Backup_Restore_Toolkit.ps1" -Action RestartAdapter -AdapterName "%ADAPTER%"
 goto complete
 
 :deleteprofile
+set "PROFILE="
 set /p PROFILE=Profile name to back up and delete: 
 powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File "%~dp0Windows_WiFi_Profile_Backup_Restore_Toolkit.ps1" -Action DeleteProfile -ProfileName "%PROFILE%"
 goto complete
